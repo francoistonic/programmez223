@@ -1,0 +1,228 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fnil\fcharset0 Consolas;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Calibri;
+}
+{\colortbl;\red255\green255\blue255;\red146\green146\blue146;\red0\green0\blue0;\red180\green38\blue26;
+\red51\green162\blue189;\red132\green33\blue156;\red4\green51\blue255;\red0\green143\blue0;\red0\green145\blue147;
+}
+{\*\expandedcolortbl;;\csgenericrgb\c57414\c57415\c57415;\csgenericrgb\c0\c0\c0;\csgenericrgb\c70687\c15010\c10243;
+\csgenericrgb\c19855\c63462\c74115;\csgenericrgb\c51669\c12900\c61118;\csgenericrgb\c1680\c19831\c100000;\csgenericrgb\c0\c56028\c0;\csgenericrgb\c0\c56904\c57458;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs19 \cf2 \
+#includ\cf3 e\cf4  <Windows.h\cf3 >\cf5 \
+\
+DW\cf3 O\cf6 RD WIN\cf3 API MyThreadPr\cf5 oc(LPV\cf3 O\cf2 ID lpPa\cf3 ram)\cf7 \
+\{\cf3 \
+	\cf7 for\cf3  (int i = 0; i < 10000; i++)\
+	\{\
+		\cf4 pri\cf3 ntf(".");\
+	\}\
+\cf4 \
+	p\cf3 rint\cf7 f("\\n"\cf3 );\
+	ret\cf7 urn\cf3  0;\
+\}\
+\
+\cf5 \
+int \cf3 main()\
+\{\
+	DWORD \cf5 dwThre\cf3 adId = 0;\
+	HANDLE hThre\cf6 ad =\cf3  CreateThread(NULL, \cf6 0, &\cf3 MyThreadProc, NULL, 0, &dwThreadId);\
+	WaitForSin\cf6 gleObjec\cf3 t(hThread, INFINITE);\
+	CloseH\cf7 andle(\cf3 hThread
+\f1\fs22 );
+\f0\fs19 \cf2 \
+    re\cf3 t\cf4 urn 0;\
+\}\cf2 \
+\
+\
+\
+#\cf3 i\cf4 nclude <std\cf3 i\cf2 o.h>\
+#i\cf3 n\cf4 clude <proc\cf3 es\cf7 s.h>\cf3 \
+#include <Win\cf7 dows\cf3 .h\cf2 >\
+\
+void \cf3 MyThr\cf7 ead\cf3 Pr\cf7 oc3\cf3 (void* pArguments)\
+\{\
+	for (int i =\cf4  0;\cf3  i < 10000; i++\cf4 )\
+	\cf3 \{\
+		p\cf7 rin\cf3 tf(".");\
+	\cf7 \}\
+\
+	pr\cf3 i\cf7 ntf\cf3 ("\\n");\
+\}\
+\
+in\cf5 t main\cf3 ()\
+\{\
+	unsig\cf5 ned in\cf3 t threadID = 0;\
+	HANDLE hThread3\cf6  = (\cf3 HANDLE)_beginthread(&MyThreadProc3\cf6 , 0, NUL\cf3 L);\
+	WaitForSingleObject(hTh\cf7 read3,\cf3  INFIN
+\f1\fs22 ITE
+\f0\fs19 \cf7 );\
+	Clo\cf3 s\cf7 eHa\cf3 ndle(hThread3);\cf5 \
+\
+	r\cf3 eturn 0;\
+\}\
+\cf5 \
+\
+\
+\cf3 unsigned int thr\cf6 eadI\cf3 D = 0;\
+HANDLE hThrea\cf6 d2 =\cf3  (HANDLE)_beginthreadex(NULL, 0, &MyThreadProc2\cf6 , NULL, \cf3 0, &threadID);\
+WaitForSing
+\f1\fs22 le
+\f0\fs19 \cf5 Objec\cf3 t\cf6 (hThre\cf3 ad2, INFINITE)\cf5 ;\
+Clo\cf3 s\cf2 eHandle\cf3 (hThr\cf7 ead\cf3 2)\cf7 ;\
+\cf3 \
+\
+\
+DWORD WINAPI MyThreadProc(LP\cf4 VOI\cf3 D lpParam)\
+\{\
+	for (int i =\cf4  0; \cf3 i < \cf7 100; i\cf3 ++)\
+	
+\f1\fs22 \{\
+
+\f0\fs19 \cf7 		pr\cf3 intf(".")\cf7 ;\
+	\cf3 	Sleep(50\cf5 );\
+	\}\
+\
+	print\cf3 f("\\n");\cf5 \
+	re\cf3 t\cf6 urn 0;\cf3 \
+\}\
+\
+\
+\
+l\cf5 ong _x\cf3  \cf2 = 0;\
+l\cf3 ong _y = 0;\
+CRITICAL_SECTION _cs1;\
+\
+DW\cf7 ORD\cf3  W\cf7 INA\cf3 PI MyThreadP1(LPVOID lpParam)\
+\{\
+	InitializeCriticalSection(&_cs1);\
+\
+	for (int i\cf4  = 0; i \cf3 < 10000; i++)\
+	\{\
+		EnterCriticalSection(&_cs1);\
+		_\cf4 x++;\cf3 \
+		\cf7 _y++;\cf3 \
+		prin\cf7 tf(\cf3 "%d/%d.", _\cf5 x, _y\cf3 );\
+		LeaveCritical\cf5 Sectio\cf3 n(&_cs1);\
+	\}\
+\
+	printf(\cf6 "\\n"\cf3 );\
+	return 0;\
+\}\cf6 \
+\
+i\cf3 nt main()\
+\{\
+	DWORD \cf5 dwThr\cf3 eadId1 = 0;\
+	HANDL\cf5 E hThr\cf3 ead1 = CreateThread(NULL,\cf6  0, \cf3 &MyThreadP1, NULL,\cf6  0, \cf3 &dwThreadId1);\
+	DWOR\cf5 D dwT\cf3 hreadId2 = 0;\
+	HAN\cf5 DLE hT\cf3 hread2 = CreateThread(NUL\cf6 L, 0\cf3 , &MyThreadP1, NUL\cf6 L, 0\cf3 , &dwThreadId2);\
+	DW\cf5 ORD dw\cf3 ThreadId3 = 0;\
+	HANDLE hThread3 = CreateThread(NULL, 0, &MyThreadP1, NULL, 0,\cf6  &dw\cf3 Th\cf6 readId3)\cf3 ;\
+	HANDLE hTab[3] = \{ hThread1, hThread2, hThread3 \};\
+	WaitForMultipleObjec\cf7 ts(3, \cf3 hTab, 
+\f1\fs22 T
+\f0\fs19 RU\cf7 E, I\cf3 NFINITE);\
+	Cl\cf7 oseH\cf3 andle(hThread1);\
+	Clo\cf4 seHandle(hThread2);\
+	C\cf3 loseHandle(hThread3);\
+\
+	return 0\cf4 ;\
+\}\
+\
+\
+\
+void DoSimp\cf3 leTask(\cf7 void\cf3 )\
+\{\
+	Logger::LogDebug("E\cf8 nter DoSimpleTask...");\
+	wa\cf3 it(1000);\
+	Logge\cf8 r::LogDebug("Leave DoSimpleTask...");\
+\}\
+\
+\
+void Call_Task_Gro\cf3 up_Run()\
+\{\
+	\cf7 // D\cf3 \'e9clar\cf7 atio\cf3 n du Task Group\
+	task_group g;\
+	/\cf8 / Avec une d\cf3 \'e9c\cf7 lara\cf3 tion explicite de task_handle et \cf8 de prototype\
+	task_handle\cf3 <void (*)(void)>\cf7  t1 \cf3 = \cf7 make\cf3 _task(&DoSimpleTask);\
+	\cf7 // A\cf3 vec auto\
+	auto t2 = m\cf8 ake_task(&DoSimpleTask\cf3 );\
+	// Avec std::tr1::function\
+	std::function<void (void)> f3 = &DoSimpleT
+\f1\fs22 a
+\f2\fs18 sk
+\f0\fs19 \cf7 ;\
+\cf3 	auto t3 = make_task(f3);\
+	// Cr\'e9ation des\cf4  t\'e2ches\
+	g.run(t1);\
+	g.run(t\cf3 2);\
+	g.run(t3);\cf8 \
+	g.run( &DoSimpleTask );\
+	g.wait();\
+\}\
+\
+\
+\cf3  \cf7 \
+int DoS\cf3 i\cf7 mpl\cf3 eTask_Random()\
+\{\
+	Logger::LogDebug(\cf7 "Enter D\cf3 o\cf7 Sim\cf3 pleT\cf7 ask_Ra\cf3 ndom...\cf7 ");\
+	\cf3 wait(1000);\
+	// G\'e9n\'e9ration d'un nombre al\'e9atoire \cf4 de 1..1000\
+	unsigned int r = \cf3 0;\
+\cf7 	srand\cf3 (1); ra\cf7 nd_s\cf3 (&r);\
+	r = (unsigned int) ((double)r / ((doubl\cf7 e) \cf3 UI\cf7 NT_M\cf3 AX + 1 ) * 1000.0) + 1;\
+	Logger::Lo\cf7 gDe\cf3 bug("Leave DoSimpleTask\cf7 _Ra\cf3 ndom...");\
+	return r;\
+\}\cf4 \
+\
+void Call_Task_Grou\cf3 p_Run_Extras()\
+\{\
+	std:\cf7 :fun\cf3 ct\cf7 ion<\cf3 int (void)> f1 = &DoSimpleTas\cf7 k_Ra\cf3 ndom;\
+	task<int> t1(f1)
+\f2\fs22 ;
+\fs18 \
+
+\f0\fs19 \cf7 	t1.\cf3 wait();\
+	int ret = t1.get();\
+	printf("Tasks t1 returns %d\\\cf7 n",\cf3  r\cf7 et);\cf3 \
+\
+	std::function<void (void)> f2 =\cf7  &D\cf3 oSimpleTask;\
+	task<void>\cf7  t2\cf3 (f\cf7 2);\cf3 \
+	t2.wait();\
+\}\
+\
+\
+\
+void Call_Tas\cf7 k_G\cf3 roup_Run_Extras_WithOperator()\
+\{\
+	st\cf4 d::function<int (void)>\cf3  f1 = &DoSimpleTask_R\cf4 andom;\
+	task<int> t1(f\cf3 1);\
+	std::funct
+\f1\fs22 i
+\f2\fs18 o
+\f0\fs19 \cf7 n<in\cf3 t (void)> f2 = &DoSimpleTask_Random;\
+	task<int> t2(f2);\
+	(t\cf7 1 &&\cf3  t\cf7 2).w\cf3 ait();\
+	printf("Tasks t1 ret\cf7 urns\cf3  %d\\n", t1.get());\
+	prin\cf7 tf("\cf3 Ta\cf7 sks \cf3 t2 returns %d\\n", t2.get());\cf7 \
+\}\
+\cf3 \
+\
+\
+void Call_Task_Group_Run\cf7 _Ext\cf3 ra\cf7 s_Wi\cf3 thOperator2()\
+\{\
+	std::\cf7 func\cf3 tion<void \cf9 (v\cf3 oid)> f1 = &DoSimpleTask;\
+	ta
+\f1\fs22 s
+\fs24 \cf0 k<void> t1(f1);\
+	std::function<void (void)> f2 = &DoSimpleTask;\
+	task<void> t2(f2);\
+	std::tr1::function<void (void)> f3 = &DoSimpleTask;\
+	auto t3 = (t1 && t2).then(f3);\
+	t3.wait();\
+\}\
+\
+\
+}
